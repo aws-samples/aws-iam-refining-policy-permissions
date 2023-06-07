@@ -1,17 +1,83 @@
-## My Project
+# Refining IAM Permissions Like A Pro
 
-TODO: Fill this README out!
+This project is part of the workshop [Refining IAM Permissions Like A Pro](https://workshop.aws). Follow the workshop directions for optimal use of this repository contents.
 
-Be sure to:
+***DO NOT DEPLOY THE CODE FROM THIS REPOSITORY IN AN EXISTING AWS ACCOUNT YOU CURRENTLY USE. CREATE A NEW SANDBOX ACCOUNT FOR THE PURPOSE OF THIS WORKSHOP.***
 
-* Change the title in this README
-* Edit your repository description on GitHub
+## Sandbox environment
+* This is a sandbox environment for learning purposes only. You will learn techniques to facilitate least-privilege in AWS
 
-## Security
+## Solving customer challenges around least-privilege in AWS
+* This project builds an environment in an AWS Account facilitating the experimentation of various techniques facilitating least-privilege
 
-See [CONTRIBUTING](CONTRIBUTING.md#security-issue-notifications) for more information.
+* * *
 
-## License
+## Architecture Overview
 
-This library is licensed under the MIT-0 License. See the LICENSE file.
+An AWS CDK application creates three (3) stacks named `CommonStack`, `PrivilegedStack`, and `UnusedStack` 
 
+
+### CommonStack components:
+* SNS Topic for notification of results
+* S3 Bucket to store privileged API call list
+* IAM Role for practice
+* Lambda function to generate CloudTrail activity
+
+### PrivilegedStack components:
+* EventBridge rule to capture API calls manipulating IAM Policies and assignment to IAM Users, Groups, and Roles
+* Lambda function to evaluate IAM policies
+
+### UnusedStack components:
+* EventBridge rule to trigger lambda function in timed intervals
+* Lambda function to evaluate unused permissions
+
+![Image](readme-images/diagram.png)
+
+* * *
+
+## Deployment using AWS CDK v2
+* Clone this repository
+* Install [AWS CLI v2](https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2.html)
+* Install [Python 3.10 or later](https://www.python.org/downloads/) 
+* Install [AWS CDK](https://docs.aws.amazon.com/cdk/latest/guide/getting_started.html)
+* Install [Docker Desktop](https://www.docker.com/products/docker-desktop/)
+* Use your IDE of preference such as `PyCharm`, `Visual Studio Code`, `Sublime`, or `Atom`
+* Local configuration steps:
+  * Go to the root directory of the cloned repo 
+  * Run `npm i` to install required libraries
+  * Create a virtual environment for Python `python -m venv .venv`, you can use other virtual environment tools
+  * Activate the virtual environment:
+    * `source .venv/bin/activate` for MacOS and Linux
+    * `.venv\scripts\activate` for Windows
+  * Run `pip install -r requirements` to install required libraries
+  * Have your environment variables configured with AWS credentials for the account you will deploy it against
+  * Test AWS credentials using `aws sts get-caller-identity`
+  * Prepare the account for deployment running `npx cdk bootstrap`
+  * Check synthesis `npx cdk synth`
+  * If no errors were detected, deploy all Stacks `npx cdk deploy --all`
+
+* * *
+
+## Cost
+
+Consider the costs involved in deploying this solution beyond what is included with [AWS Free Tier](https://aws.amazon.com/free/), if applicable:
+
+* [Amazon S3](https://aws.amazon.com/s3/pricing/)
+* [AWS Lambda](https://aws.amazon.com/lambda/pricing/)
+* [Amazon SNS](https://aws.amazon.com/sns/pricing/)
+
+* * *
+
+
+## Related Resources
+
+### AWS resources
+* [IAM Access Analyzer Guides You Toward Least-Privilege Permissions](https://aws.amazon.com/iam/features/analyze-access/)
+* [Refining permissions in AWS using last accessed information](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_access-advisor.html)
+* [Integrating AWS IAM Access Analyzer in a CI/CD Pipeline](https://catalog.us-east-1.prod.workshops.aws/workshops/fff8e490-f397-43d2-ae26-737a6dc4ac68/en-US)
+* [IAM policy evaluation workshop](https://catalog.us-east-1.prod.workshops.aws/workshops/6dc3124a-6bd4-46eb-b5c4-be438a82ba3d/en-US)
+
+### Third-party resources
+
+
+* * *

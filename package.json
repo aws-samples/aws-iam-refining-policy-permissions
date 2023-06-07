@@ -1,0 +1,11 @@
+{
+  "name": "permission-toolbelt",
+  "version": "1",
+  "description": "re:Inforce 2023",
+  "main": "setup.js",
+  "author": "AWS Professional Services",
+  "license": "MIT-0",
+  "dependencies": {
+    "aws-cdk": "2.64.0"
+  }
+}
