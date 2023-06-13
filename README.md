@@ -1,6 +1,6 @@
 # Refining IAM Permissions Like A Pro
 
-This project is part of the workshop [Refining IAM Permissions Like A Pro](https://workshop.aws). Follow the workshop directions for optimal use of this repository contents.
+This project is part of the workshop [Refining IAM Permissions Like A Pro](https://catalog.workshops.aws/refining-iam-permissions-like-a-pro). Follow the workshop directions for optimal use of this repository contents.
 
 ***DO NOT DEPLOY THE CODE FROM THIS REPOSITORY IN AN EXISTING AWS ACCOUNT YOU CURRENTLY USE. CREATE A NEW SANDBOX ACCOUNT FOR THE PURPOSE OF THIS WORKSHOP.***
 
@@ -77,7 +77,3 @@ Consider the costs involved in deploying this solution beyond what is included w
 * [Integrating AWS IAM Access Analyzer in a CI/CD Pipeline](https://catalog.us-east-1.prod.workshops.aws/workshops/fff8e490-f397-43d2-ae26-737a6dc4ac68/en-US)
 * [IAM policy evaluation workshop](https://catalog.us-east-1.prod.workshops.aws/workshops/6dc3124a-6bd4-46eb-b5c4-be438a82ba3d/en-US)
 
-### Third-party resources
-
-
-* * *
