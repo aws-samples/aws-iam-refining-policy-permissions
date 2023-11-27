@@ -6,6 +6,8 @@ This project is part of the workshop [Refining IAM Permissions Like A Pro](https
 
 ## Sandbox environment
 * This is a sandbox environment for learning purposes only. You will learn techniques to facilitate least-privilege in AWS
+* You will need `Administrator` permissions to deploy the workshop components in your AWS account.
+* The workshop provides IAM Roles as credentials to run it.
 
 ## Solving customer challenges around least-privilege in AWS
 * This project builds an environment in an AWS Account facilitating the experimentation of various techniques facilitating least-privilege
@@ -14,22 +16,44 @@ This project is part of the workshop [Refining IAM Permissions Like A Pro](https
 
 ## Architecture Overview
 
-An AWS CDK application creates three (3) stacks named `CommonStack`, `PrivilegedStack`, and `UnusedStack` 
+An AWS CDK application creates five (5) stacks:
+- CommonStack
+- CustomPolicyChecksStack
+- PolicyValidatorStack
+- UnusedAccessStack
+- PipelineStack
+- PipelineNotificationStack
 
 
 ### CommonStack components:
 * SNS Topic for notification of results
 * S3 Bucket to store privileged API call list
-* IAM Role for practice
+* IAM Roles for practice: DevOps, SecOps, SEC203
 * Lambda function to generate CloudTrail activity
-
-### PrivilegedStack components:
+* Lambda function to parse EventBridge events
 * EventBridge rule to capture API calls manipulating IAM Policies and assignment to IAM Users, Groups, and Roles
+
+### CustomPolicyChecksStack components:
 * Lambda function to evaluate IAM policies
 
-### UnusedStack components:
-* EventBridge rule to trigger lambda function in timed intervals
-* Lambda function to evaluate unused permissions
+### PolicyValidatorStack components:
+* Lambda function to evaluate IAM policies
+
+### UnusedAccessStack components:
+* EventBridge rule to trigger lambda function
+* Lambda function to notify on findings
+
+### PipelineStack components:
+* CodeCommit repository containing AWS CDK app
+* CodePipeline pipeline to detect changes in CodeCommit repository
+* CodeBuild project to evaluate IAM policies
+* Lambda function to parse notification events from the pipeline
+
+### PipelineNotificationStack components:
+* CodePipeline notification construct
+
+* * * 
+### Diagram
 
 ![Image](readme-images/diagram.png)
 
@@ -38,10 +62,10 @@ An AWS CDK application creates three (3) stacks named `CommonStack`, `Privileged
 ## Deployment using AWS CDK v2
 * Clone this repository
 * Install [AWS CLI v2](https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2.html)
-* Install [Python 3.10 or later](https://www.python.org/downloads/) 
+* Install [Python 3.11](https://www.python.org/downloads/) 
 * Install [AWS CDK](https://docs.aws.amazon.com/cdk/latest/guide/getting_started.html)
 * Install [Docker Desktop](https://www.docker.com/products/docker-desktop/)
-* Use your IDE of preference such as `PyCharm`, `Visual Studio Code`, `Sublime`, or `Atom`
+* Use your IDE of preference such as `PyCharm`, `Visual Studio Code`, `Sublime`, `vim`, `Atom`
 * Local configuration steps:
   * Go to the root directory of the cloned repo 
   * Run `npm i` to install required libraries
@@ -50,7 +74,7 @@ An AWS CDK application creates three (3) stacks named `CommonStack`, `Privileged
     * `source .venv/bin/activate` for MacOS and Linux
     * `.venv\scripts\activate` for Windows
   * Run `pip install -r requirements` to install required libraries
-  * Have your environment variables configured with AWS credentials for the account you will deploy it against
+  * [Configure the AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html) to use your AWS account's `Administrator` credentials
   * Test AWS credentials using `aws sts get-caller-identity`
   * Prepare the account for deployment running `npx cdk bootstrap`
   * Check synthesis `npx cdk synth`
@@ -65,6 +89,9 @@ Consider the costs involved in deploying this solution beyond what is included w
 * [Amazon S3](https://aws.amazon.com/s3/pricing/)
 * [AWS Lambda](https://aws.amazon.com/lambda/pricing/)
 * [Amazon SNS](https://aws.amazon.com/sns/pricing/)
+* [AWS CodeBuild](https://aws.amazon.com/codebuild/pricing/)
+* [AWS CodePipeline](https://aws.amazon.com/codepipeline/pricing/)
+* [Amazon EventBridge](https://aws.amazon.com/eventbridge/pricing/)
 
 * * *
 
@@ -76,4 +103,3 @@ Consider the costs involved in deploying this solution beyond what is included w
 * [Refining permissions in AWS using last accessed information](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_access-advisor.html)
 * [Integrating AWS IAM Access Analyzer in a CI/CD Pipeline](https://catalog.us-east-1.prod.workshops.aws/workshops/fff8e490-f397-43d2-ae26-737a6dc4ac68/en-US)
 * [IAM policy evaluation workshop](https://catalog.us-east-1.prod.workshops.aws/workshops/6dc3124a-6bd4-46eb-b5c4-be438a82ba3d/en-US)
-

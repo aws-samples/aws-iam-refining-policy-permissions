@@ -1,11 +1,11 @@
 {
-  "name": "aws-iam-refining-policy-permissions",
+  "name": "workshop_iac",
   "version": "1",
-  "description": "re:Invent 2023",
+  "description": "re:Inforce 2023",
   "main": "setup.js",
   "author": "AWS Professional Services",
   "license": "MIT-0",
   "dependencies": {
-    "aws-cdk": "2.110.0"
+    "aws-cdk": "2.105.0"
   }
 }

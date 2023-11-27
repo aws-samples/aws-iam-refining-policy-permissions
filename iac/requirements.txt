@@ -1,0 +1,4 @@
+-e .
+pylint
+black
+git-remote-codecommit

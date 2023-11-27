@@ -7,24 +7,56 @@ from aws_cdk import (
 )
 
 from stack_common import CommonStack
-from stack_privileged import PrivilegedStack
-from stack_unused import UnusedStack
-
+from stack_custom_policy_checks import CustomPolicyChecksStack
+from stack_unused_access import UnusedAccessStack
+from stack_policy_validator import PolicyValidatorStack
+from stack_pipeline import PipelineStack
+from stack_pipeline_notification import PipelineNotificationStack
 app = App()
 
-_CommonStack = CommonStack(app, "CommonStack")
-_PrivilegedStack = PrivilegedStack(
+_CommonStack = CommonStack(
     app,
-    "PrivilegedStack",
-    snstopic=_CommonStack.topic,
-    s3bucket=_CommonStack.bucket
+    "CommonStack",
+    stack_name="WorkshopCommonStack"
 )
-_UnusedStack = UnusedStack(
+_CustomPolicyChecksStack = CustomPolicyChecksStack(
     app,
-    "UnusedStack",
-    snstopic=_CommonStack.topic,
+    "CustomPolicyChecksStack",
+    stack_name="WorkshopCustomPolicyChecksStack",
     s3bucket=_CommonStack.bucket,
-    role=_CommonStack.role,
+    s3key=_CommonStack.critical_permissions_file_name,
+    snstopic=_CommonStack.topic,
+    snsfanoutlambdas=_CommonStack.sns_fan_out_lambdas,
+)
+_PolicyValidatorStack = PolicyValidatorStack(
+    app,
+    "PolicyValidatorStack",
+    stack_name="WorkshopPolicyValidatorStack",
+    snstopic=_CommonStack.topic,
+    snsfanoutlambdas=_CommonStack.sns_fan_out_lambdas,
+    softfailparam=_CommonStack.soft_fail_param,
+    hardfailparam=_CommonStack.hard_fail_param,
+)
+_UnusedAccessStack = UnusedAccessStack(
+    app,
+    "UnusedAccessStack",
+    stack_name="WorkshopUnusedAccessStack",
+    snstopic=_CommonStack.topic,
+)
+_PipelineStack = PipelineStack(
+    app,
+    "PipelineStack",
+    stack_name="WorkshopPipelineStack",
+    snstopic=_CommonStack.topic,
+    softfailparam=_CommonStack.soft_fail_param,
+    hardfailparam=_CommonStack.hard_fail_param,
+)
+_PipelineNotificationStack = PipelineNotificationStack(
+    app,
+    "PipelineNotificationStack",
+    stack_name="WorkshopNotificationPipelineStack",
+    snspipeline=_PipelineStack.snspipeline,
+    iacscan=_PipelineStack.iacscan,
 )
 
 app.synth()
