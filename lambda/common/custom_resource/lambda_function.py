@@ -94,6 +94,7 @@ privileged_actions = [
 
 
 def lambda_handler(event, context):
+    logger.info(f"### RAW Event {json.dumps(event)}")
     with open(r"/tmp/" + s3key, "w") as fp:
         fp.write("\n".join(str(item) for item in privileged_actions))
     client_s3.upload_file("/tmp/" + s3key, s3bucket, s3key)

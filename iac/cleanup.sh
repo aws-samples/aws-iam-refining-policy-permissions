@@ -46,4 +46,8 @@ for loggroup in ${loggroups}; do
       aws logs delete-log-group --log-group-name ${loggroup} --region ${region}
       echo "${loggroup} deleted"
     fi
+        if  [[ "${loggroup}" =~ ^/aws/codebuild/IacScan.*$ ]]; then
+      aws logs delete-log-group --log-group-name ${loggroup} --region ${region}
+      echo "${loggroup} deleted"
+    fi
 done

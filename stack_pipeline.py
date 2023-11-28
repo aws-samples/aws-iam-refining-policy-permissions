@@ -66,6 +66,10 @@ class PipelineStack(Stack):
                     "phases": {
                         "install": {
                             "commands": [
+                                "curl https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip -o awscliv2.zip",
+                                "unzip awscliv2.zip",
+                                "sudo ./aws/install --bin-dir /usr/local/bin --install-dir /usr/local/aws-cli --update",
+                                "export PATH=/usr/local/bin:$PATH",
                                 "npm i",
                                 "npm install -g aws-cdk",
                                 "npx cdk version",
@@ -73,7 +77,9 @@ class PipelineStack(Stack):
                                 ". .venv/bin/activate",
                                 "python --version",
                                 "pip install -r requirements.txt",
-                                "pip install cfn-policy-validator",
+                                "pip install boto3==1.33.0",
+                                "pip install cfn-policy-validator==0.0.25",
+                                "pip list",
                             ]
                         },
                         "build": {

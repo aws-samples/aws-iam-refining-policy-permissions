@@ -58,7 +58,7 @@ class UnusedAccessStack(Stack):
                     sid="AccessAnalyzerPermissions",
                     effect=aws_iam.Effect.ALLOW,
                     actions=[
-                        "access-analyzer:GetFindingV2",
+                        "access-analyzer:GetFinding",
                     ],
                     resources=["*"],
                 ),

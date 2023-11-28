@@ -1,4 +1,4 @@
 -e .
-pylint
-black
-git-remote-codecommit
+pylint==3.0.2
+black==23.11.0
+git-remote-codecommit==1.17

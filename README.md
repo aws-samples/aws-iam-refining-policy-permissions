@@ -86,6 +86,7 @@ An AWS CDK application creates five (5) stacks:
 
 Consider the costs involved in deploying this solution beyond what is included with [AWS Free Tier](https://aws.amazon.com/free/), if applicable:
 
+* [AWS IAM Access Analyzer](https://aws.amazon.com/iam/access-analyzer/pricing/)
 * [Amazon S3](https://aws.amazon.com/s3/pricing/)
 * [AWS Lambda](https://aws.amazon.com/lambda/pricing/)
 * [Amazon SNS](https://aws.amazon.com/sns/pricing/)
@@ -99,6 +100,7 @@ Consider the costs involved in deploying this solution beyond what is included w
 ## Related Resources
 
 ### AWS resources
+* [IAM Access Analyzer updates](https://aws.amazon.com/blogs/aws/iam-access-analyzer-updates-find-unused-access-check-policies-before-deployment/)
 * [IAM Access Analyzer Guides You Toward Least-Privilege Permissions](https://aws.amazon.com/iam/features/analyze-access/)
 * [Refining permissions in AWS using last accessed information](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_access-advisor.html)
 * [Integrating AWS IAM Access Analyzer in a CI/CD Pipeline](https://catalog.us-east-1.prod.workshops.aws/workshops/fff8e490-f397-43d2-ae26-737a6dc4ac68/en-US)

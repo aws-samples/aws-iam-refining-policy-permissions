@@ -1,2 +1,2 @@
-boto3
-cfnresponse
+boto3==1.33.0
+cfnresponse==1.1.2

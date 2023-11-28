@@ -432,6 +432,16 @@ class CommonStack(Stack):
                         "arn:aws:access-analyzer:*:" + Aws.ACCOUNT_ID + ":analyzer/" + analyzer_name.value_as_string
                     ],
                 ),
+                aws_iam.PolicyStatement(
+                    sid="AllowAccessAnalyzerServiceLinkedRole",
+                    effect=aws_iam.Effect.ALLOW,
+                    actions=[
+                        "iam:CreateServiceLinkedRole",
+                    ],
+                    resources=[
+                        "arn:aws:iam::"+Aws.ACCOUNT_ID + ":role/aws-service-role/access-analyzer.amazonaws.com/AWSServiceRoleForAccessAnalyzer"
+                    ],
+                ),
             ],
         )
 

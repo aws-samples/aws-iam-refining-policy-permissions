@@ -1,1 +1,1 @@
-cfn-policy-validator
+cfn-policy-validator==0.0.25
