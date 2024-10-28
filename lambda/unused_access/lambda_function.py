@@ -15,7 +15,7 @@ def lambda_handler(event, context):
     """Lambda Handler"""
     logger.info(f"### event received {event}")
     findind_id = event["detail"]["findingId"]
-    analyzer = event["detail"]["resource"]
+    analyzer = event["detail"]["resources"][0]
     response = ""
     client_sns = boto3.client("sns")
     logger.info(f"### finding id {findind_id} analyzer {analyzer}")
