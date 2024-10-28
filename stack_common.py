@@ -105,15 +105,6 @@ class CommonStack(Stack):
                 aws_iam.PolicyStatement(
                     effect=aws_iam.Effect.ALLOW,
                     actions=[
-                        "iam:passrole"
-                    ],
-                    resources=[
-                        "arn:aws:iam::" + Aws.ACCOUNT_ID +":role/WorkshopPipelineStack-IacScanRole*"
-                    ],
-                ),
-                aws_iam.PolicyStatement(
-                    effect=aws_iam.Effect.ALLOW,
-                    actions=[
                         "access-analyzer:*"
                     ],
                     resources=[
