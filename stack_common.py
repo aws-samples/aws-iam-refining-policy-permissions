@@ -164,7 +164,8 @@ class CommonStack(Stack):
                     actions=[
                         "codebuild:*Get*",
                         "codebuild:List*",
-                        "codebuild:UpdateProject"
+                        "codebuild:UpdateProject",
+                        "codebuild:UpdateProjectVisibility",
                     ],
                     resources=[
                         "*"
